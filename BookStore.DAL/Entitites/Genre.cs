@@ -1,10 +1,8 @@
 ﻿namespace BookStore.DAL.Entitites;
 
-public class Genre
+public class Genre : BaseEntity
 {
     public string Name { get; set; }
 
-    public Guid? ParentGenreId { get; set; }
-
-    ICollection<BookGenre> Books { get; set; }
+    public ICollection<BookGenre> Books { get; set; }
 }

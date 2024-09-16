@@ -1,7 +1,6 @@
 ﻿namespace BookStore.DAL.Entitites;
 
 public class Book : BaseEntity
-
 {
     public string Title { get; set; }
 
