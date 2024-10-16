@@ -2,6 +2,8 @@
 
 public class Book : BaseEntity
 {
+    public string Isbn { get; set; }
+
     public string Title { get; set; }
 
     public string? Description { get; set; }
