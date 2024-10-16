@@ -30,6 +30,8 @@ public class BookStoreDbContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Title).IsRequired();
+            entity.Property(e => e.Isbn13).IsRequired();
+            entity.HasIndex(e => e.Isbn13).IsUnique();
 
             entity.HasOne(e => e.Publisher)
                   .WithMany(p => p.Books);
