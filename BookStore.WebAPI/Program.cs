@@ -6,8 +6,6 @@ namespace BookStore.WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Data services
-
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
