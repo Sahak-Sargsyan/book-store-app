@@ -13,5 +13,5 @@ public interface IBaseRepository<TEntity>
 
     void Update(TEntity entity);
 
-    void DeleteById(TEntity entity);
+    void DeleteById(Guid id);
 }
