@@ -2,7 +2,7 @@
 
 public class Book : BaseEntity
 {
-    public string Isbn { get; set; }
+    public string Isbn13 { get; set; }
 
     public string Title { get; set; }
 
