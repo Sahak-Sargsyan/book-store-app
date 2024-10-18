@@ -20,5 +20,5 @@ public record GenreCreateDto
 
 public record GenreUpdateDto
 {
-    public GenreListDto GenreList { get; set; }
+    public GenreListDto Genre { get; set; }
 }
