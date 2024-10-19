@@ -8,11 +8,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookStore.DAL\BookStore.DAL.csproj" />
+    <ProjectReference Include="..\BookStore.Dtos\BookStore.Dtos.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
   </ItemGroup>
 
 </Project>
