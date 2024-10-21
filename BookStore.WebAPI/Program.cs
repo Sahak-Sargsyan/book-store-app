@@ -1,3 +1,6 @@
+using BookStore.DAL.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace BookStore.WebAPI
 {
     public class Program
@@ -5,6 +8,10 @@ namespace BookStore.WebAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Data services
+            builder.Services.AddDbContext<BookStoreDbContext>(options => options.UseSqlServer(
+                builder.Configuration.GetConnectionString("BookStore")!));
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
