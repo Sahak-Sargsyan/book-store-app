@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.DAL.Repository;
 
+#pragma warning disable
 public class BookRepository : BaseRepository<Book>, IBookRepository
 {
     private readonly BookStoreDbContext _dbContext;
@@ -31,14 +32,20 @@ public class BookRepository : BaseRepository<Book>, IBookRepository
             .FirstOrDefaultAsync(b => b.Isbn13 == isbn13);
     }
 
-    public async Task<IEnumerable<Book>> GetBooksByAuthorAsync(Guid authorId)
+    public async Task<IEnumerable<Book>> GetBooksByAuthorAsync(IEnumerable<Guid> authors)
     {
-        return await _dbSet.Where(b => b.Authors.Any(ba => ba.AuthorId == authorId)).ToListAsync();
+        var list = new List<Book>();
+        foreach(var author in authors)
+        {
+            list.AddRange(await _dbSet.Where(b => b.Authors.Any(ba => ba.AuthorId == author)).ToListAsync());
+        }
+
+        return list;
     }
 
     public async Task<IEnumerable<Book>> GetBooksByGenreAsync(Guid genreId)
     {
-        return await _dbSet.Where(b => b.Genres.Any(bg => bg.GenreId == genreId)).ToListAsync();
+        return await _dbSet.Where(b => b.Genres.Any(ba => ba.GenreId == genreId)).ToListAsync();
     }
 
     public async Task<IEnumerable<Book>> GetBooksByPublisherAsync(Guid publisherId)
