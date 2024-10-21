@@ -12,7 +12,7 @@ public interface IBookService
 
     Task<IEnumerable<BookListDto>> GetBooksByAuthorsAsync(IEnumerable<Guid> authors);
 
-    Task<IEnumerable<BookListDto>> GetBooksByGenresAsync(IEnumerable<Guid> genres);
+    Task<IEnumerable<BookListDto>> GetBooksByGenresAsync(Guid genreId);
 
     Task AddBookAsync(BookCreateDto model);
 
