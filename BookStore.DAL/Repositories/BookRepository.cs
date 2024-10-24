@@ -32,20 +32,14 @@ public class BookRepository : BaseRepository<Book>, IBookRepository
             .FirstOrDefaultAsync(b => b.Isbn13 == isbn13);
     }
 
-    public async Task<IEnumerable<Book>> GetBooksByAuthorAsync(IEnumerable<Guid> authors)
+    public async Task<IEnumerable<Book>> GetBooksByAuthorAsync(Guid authorId)
     {
-        var list = new List<Book>();
-        foreach(var author in authors)
-        {
-            list.AddRange(await _dbSet.Where(b => b.Authors.Any(ba => ba.AuthorId == author)).ToListAsync());
-        }
-
-        return list;
+        return await _dbSet.Where(b => b.Authors.Any(ba => ba.AuthorId == authorId)).ToListAsync();
     }
 
     public async Task<IEnumerable<Book>> GetBooksByGenreAsync(Guid genreId)
     {
-        return await _dbSet.Where(b => b.Genres.Any(ba => ba.GenreId == genreId)).ToListAsync();
+        return await _dbSet.Where(b => b.Genres.Any(bg => bg.GenreId == genreId)).ToListAsync();
     }
 
     public async Task<IEnumerable<Book>> GetBooksByPublisherAsync(Guid publisherId)

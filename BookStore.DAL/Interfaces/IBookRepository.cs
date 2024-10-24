@@ -11,5 +11,5 @@ public interface IBookRepository : IBaseRepository<Book>
 
     Task<IEnumerable<Book>> GetBooksByGenreAsync(Guid genreId);
 
-    Task<IEnumerable<Book>> GetBooksByAuthorAsync(IEnumerable<Guid> authors);
+    Task<IEnumerable<Book>> GetBooksByAuthorAsync(Guid authorId);
 }
