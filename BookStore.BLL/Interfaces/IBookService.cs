@@ -10,9 +10,11 @@ public interface IBookService
 
     Task<BookListDto> GetBookByIsbn13Async(string isbn13);
 
-    Task<IEnumerable<BookListDto>> GetBooksByAuthorsAsync(IEnumerable<Guid> authors);
+    Task<IEnumerable<BookListDto>> GetBooksByAuthorsAsync(Guid authorId);
 
     Task<IEnumerable<BookListDto>> GetBooksByGenresAsync(Guid genreId);
+
+    Task<IEnumerable<BookListDto>> GetBooksByPublisherAsync(Guid publisherId);
 
     Task AddBookAsync(BookCreateDto model);
 

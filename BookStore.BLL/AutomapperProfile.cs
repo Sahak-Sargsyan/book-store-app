@@ -39,7 +39,7 @@ public class AutomapperProfile : Profile
             .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src))
             .ReverseMap();
 
-        // Publisher Dtos
+        // Genre Dtos
         CreateMap<Genre, GenreDto>().ReverseMap();
         CreateMap<Genre, GenreListDto>().ReverseMap();
         CreateMap<Genre, GenreCreateDto>()
@@ -48,5 +48,13 @@ public class AutomapperProfile : Profile
         CreateMap<Genre, GenreUpdateDto>()
             .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src))
             .ReverseMap();
+
+        // Publisher Dtos
+        CreateMap<Publisher, PublisherDto>().ReverseMap();
+        CreateMap<Publisher, PublisherListDto>().ReverseMap();
+        CreateMap<Publisher, PublisherCreateDto>()
+            .ForMember(dest => dest.Publisher, opt => opt.MapFrom(src => src))
+            .ReverseMap();
+
     }
 }

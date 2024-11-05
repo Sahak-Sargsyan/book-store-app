@@ -54,20 +54,31 @@ public class BookService : IBookService
         return book;
     }
 
-    public async Task<IEnumerable<BookListDto>> GetBooksByAuthorsAsync(IEnumerable<Guid> authors)
+    public async Task<IEnumerable<BookListDto>> GetBooksByAuthorsAsync(Guid authorId)
     {
-        var entities = await _unitOfWork.BookRepository.GetBooksByAuthorAsync(authors);
+        var entities = await _unitOfWork.BookRepository.GetBooksByAuthorAsync(authorId);
         var books = _mapper.Map<IEnumerable<BookListDto>>(entities);
         return books;
     }
 
-    public Task<IEnumerable<BookListDto>> GetBooksByGenresAsync(Guid genreId)
+    public async Task<IEnumerable<BookListDto>> GetBooksByGenresAsync(Guid genreId)
     {
-        throw new NotImplementedException();
+        var entity = await _unitOfWork.BookRepository.GetBooksByGenreAsync(genreId);
+        var book = _mapper.Map<IEnumerable<BookListDto>>(entity);
+        return book;
     }
 
-    public Task UpdateBookAsync(BookUpdateDto model)
+    public async Task<IEnumerable<BookListDto>> GetBooksByPublisherAsync(Guid publisherId)
     {
-        throw new NotImplementedException();
+        var entities = await _unitOfWork.BookRepository.GetBooksByPublisherAsync(publisherId);
+        var books = _mapper.Map<IEnumerable<BookListDto>>(entities);
+        return books;
+    }
+
+    public async Task UpdateBookAsync(BookUpdateDto model)
+    {
+        var entity = _mapper.Map<Book>(model);
+        _unitOfWork.BookRepository.Update(entity);
+        await _unitOfWork.SaveAsync();
     }
 }
