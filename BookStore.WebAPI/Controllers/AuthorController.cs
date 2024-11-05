@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.WebAPI.Controllers;
 
+[ApiController]
+[Route("authors")]
 public class AuthorController : Controller
 {
     private readonly IAuthorService _service;

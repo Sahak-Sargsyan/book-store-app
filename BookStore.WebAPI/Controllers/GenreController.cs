@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.WebAPI.Controllers;
 
+[ApiController]
+[Route("genres")]
 public class GenreController : Controller
 {
     private readonly IGenreService _service;
