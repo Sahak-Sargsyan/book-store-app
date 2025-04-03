@@ -28,7 +28,12 @@ A multi-layered .NET Web API project for managing a bookstore, including user au
 - JWT Authentication
 - RESTful API
 
-## 📦 Setup Instructions
+## Getting Started
+### Prerequisites
+- .NET SDK
+- SQL Server or any supported database
+
+### 📦 Setup Instructions
 
 1. Clone the repository
     ```bash
@@ -51,14 +56,14 @@ A multi-layered .NET Web API project for managing a bookstore, including user au
     dotnet run --project BookStore.WebAPI
     ```
 
-### 🚧 Status
+## 🚧 Status
 
 This project is currently under active development.
 New features, refactoring, and improvements are being added continuously.
 
 ---
 
-### ✨ Contributions
+## ✨ Contributions
 
 Pull requests are welcome!
 If you have suggestions for improvements, feel free to open an issue or submit a PR.
@@ -66,7 +71,7 @@ All contributions, big or small, are appreciated!
 
 ---
 
-### 📄 License
+## 📄 License
 
 This project is licensed under the MIT License.
 See the [LICENSE](LICENSE) file for more information.
