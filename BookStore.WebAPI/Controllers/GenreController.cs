@@ -1,5 +1,6 @@
 ﻿using BookStore.BLL.Interfaces;
 using BookStore.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.WebAPI.Controllers;
@@ -15,6 +16,7 @@ public class GenreController : Controller
         _service = service;
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GenreListDto>>> GetAllGenresAsync()
     {
