@@ -1,3 +1,4 @@
+
 # 📚 BookStoreApp
 
 A multi-layered .NET Web API project for managing a bookstore, including user authentication, business logic, data access with PostgreSQL, and DTO support using AutoMapper.
@@ -28,10 +29,12 @@ A multi-layered .NET Web API project for managing a bookstore, including user au
 - JWT Authentication
 - RESTful API
 
+
 ## Getting Started
 ### Prerequisites
 - .NET SDK
 - SQL Server or any supported database
+
 
 ### 📦 Setup Instructions
 
@@ -75,4 +78,3 @@ All contributions, big or small, are appreciated!
 
 This project is licensed under the MIT License.
 See the [LICENSE](LICENSE) file for more information.
-
