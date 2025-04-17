@@ -11,5 +11,6 @@ namespace BookStore.BLL.Interfaces
     public interface IAuthService
     {
         public Task<LoginResponseDto> Login(LoginRequestDto loginRequest);
+        public Task Register(RegisterRequestDto registerRequest);
     }
 }

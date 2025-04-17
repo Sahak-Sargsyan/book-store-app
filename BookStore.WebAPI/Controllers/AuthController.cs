@@ -24,7 +24,14 @@ namespace BookStore.WebAPI.Controllers
         {
             var res = await _authService.Login(loginRequest);
 
-            return res;
+            return Ok(res);
+        }
+
+        [HttpPost("register")]
+        public async Task<ActionResult> Register(RegisterRequestDto registerRequest)
+        {
+            await _authService.Register(registerRequest);
+            return Ok();
         }
     }
 }

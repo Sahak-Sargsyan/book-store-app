@@ -37,5 +37,21 @@ namespace BookStore.BLL.Services
 
             return res;
         }
+
+        public async Task Register(RegisterRequestDto registerRequest)
+        {
+            var content = new StringContent(
+                JsonConvert.SerializeObject(new
+                {
+                    userName = registerRequest.UserName,
+                    email = registerRequest.Email,
+                    password = registerRequest.Password,
+                }),
+                Encoding.UTF8,
+                "application/json-patch+json");
+
+            var httpClient = new HttpClient();
+            var result = await httpClient.PostAsync(url + "register", content);
+        }
     }
 }

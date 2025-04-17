@@ -36,9 +36,23 @@ namespace AuthService.Services
             return response;
         }
 
-        public Task Register(RegisterRequestDto registerRequest)
+        public async Task Register(RegisterRequestDto registerRequest)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByEmailAsync(registerRequest.Email);
+            if (user != null)
+            {
+                throw new ArgumentException("User exists");
+            }
+
+            var newUser = new User()
+            {
+                Email = registerRequest.Email,
+                UserName = registerRequest.UserName,
+            };
+            var hashedPassword = new PasswordHasher<User>().HashPassword(newUser, registerRequest.Password);
+            newUser.PasswordHash = hashedPassword;
+
+            await _userManager.CreateAsync(newUser);
         }
     }
 }
