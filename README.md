@@ -1,115 +1,80 @@
-# N-Tier WebApi Application
-**Note:** This project is currently under development.
 
-## Introduction
-This repository contains an N-tier architecture WebApi application developed using ASP.NET. The application manages entities such as Books, Authors, Publishers, and Genres. It implements repository and UnitOfWork patterns, along with Dependency Injection (DI) for enhanced modularity and maintainability. The application utilizes EntityFramework as the ORM and is built on .NET 6.
+# 📚 BookStoreApp
 
-## Features
-- **CRUD Operations** for Books, Authors, Publishers, and Genres.
-- **Many-to-Many Relationships** managed through `BookAuthor` and `BookGenre` entities.
-- **Repository Pattern** for data access abstraction.
-- **UnitOfWork Pattern** to manage transaction consistency.
-- **Dependency Injection** configured in `Program.cs`.
-- **Data Transfer Objects (DTOs)** for transferring data between layers.
-- **Automapper** for mapping between domain models and DTOs.
+A multi-layered .NET Web API project for managing a bookstore, including user authentication, business logic, data access with PostgreSQL, and DTO support using AutoMapper.
 
-## Entities
-### Book
-Represents a book with properties such as `Id`, `Title`, `PublisherId`, `GenreId`, `Isbn13`, `Description` etc.
+## 🏗️ Project Structure
 
-### Author
-Represents an author with properties such as `Id`, `FirstName`, `LastName`, etc.
+- AuthService           – Handles user authentication
+- BookStore.BLL         – Business Logic Layer
+- BookStore.DAL         – Data Access Layer (migrating to PostgreSQL)
+- BookStore.Dtos        – Data Transfer Objects (AutoMapper profiles added)
+- BookStore.WebAPI      – Main API endpoints
 
-### Publisher
-Represents a publisher with properties such as `Id`, `CompanyName`.
+## 🚀 Features
 
-### Genre
-Represents a genre with properties such as `Id`, `Name`.
+- ✅ Layered architecture
+- 🔐 Authentication module (AuthService)
+- 🧠 Business logic separated in `BookStore.BLL`
+- 💾 Data layer using PostgreSQL `BookStore.DAL`
+- 🔄 AutoMapper integration for DTOs
+- 🌐 ASP.NET Core Web API `BookStore.WebAPI`
 
-### BookAuthor
-Manages the many-to-many relationship between Books and Authors.
+## 🛠️ Tech Stack
 
-### BookGenre
-Manages the many-to-many relationship between Books and Genres.
+- ASP.NET Core
+- Entity Framework Core
+- PostgreSQL
+- AutoMapper
+- JWT Authentication
+- RESTful API
+
 
 ## Getting Started
 ### Prerequisites
 - .NET SDK
 - SQL Server or any supported database
 
-### Installation
-1. Clone the repository:
+
+### 📦 Setup Instructions
+
+1. Clone the repository
     ```bash
     git clone https://github.com/Sahak-Sargsyan/book-store-app.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd book-store-app
-    ```
-3. Restore dependencies:
-    ```bash
-    dotnet restore
+    cd BookStoreApp
     ```
 
-### Configuration
-1. Configure the database connection string in `appsettings.json`.
-2. Apply migrations to set up the database schema:
+2. Configure PostgreSQL connection
+
+    Update your connection string in `appsettings.json` under `BookStore.WebAPI`.
+
+3. Run Migrations
     ```bash
+    cd BookStore.WebAPI
     dotnet ef database update
     ```
 
-### Running the Application
-1. Build the project:
+5. Run the App
     ```bash
-    dotnet build
-    ```
-2. Run the application:
-    ```bash
-    dotnet run
+    dotnet run --project BookStore.WebAPI
     ```
 
-## Usage
-Once the application is running, you can interact with the API endpoints using tools like Postman or curl. Here are some example requests:
+## 🚧 Status
 
-### AuthorController
-- `GET /authors` - Get all authors.
-- `POST /authors` - Add a new author.
-- `PUT /authors` - Update an existing author.
-- `GET /authors/find/{isbn13}` - Find an author by ISBN13.
-- `GET /authors/{id}` - Get an author by ID.
-- `DELETE /authors/{id}` - Delete an author by ID.
+This project is currently under active development.
+New features, refactoring, and improvements are being added continuously.
 
-### BookController
-- `GET /books` - Get all books.
-- `POST /books` - Add a new book.
-- `PUT /books` - Update an existing book.
-- `GET /books/{id}` - Get a book by ID.
-- `GET /books/find/{isbn13}` - Find a book by ISBN13.
-- `GET /books/{authorId}/authors` - Get books by author ID.
-- `GET /books/{genreId}/genres` - Get books by genre ID.
-- `GET /books/{publisherId}/publishers` - Get books by publisher ID.
-- `DELETE /books/{isbn13}` - Delete a book by ISBN13.
+---
 
-### GenreController
-- `GET /genres` - Get all genres.
-- `POST /genres` - Add a new genre.
-- `PUT /genres` - Update an existing genre.
-- `GET /genres/find/{isbn13}` - Find a genre by ISBN13.
-- `GET /genres/{id}` - Get a genre by ID.
-- `DELETE /genres/{id}` - Delete a genre by ID.
+## ✨ Contributions
 
-### PublisherController
-- `GET /publishers` - Get all publishers.
-- `POST /publishers` - Add a new publisher.
-- `PUT /publishers` - Update an existing publisher.
-- `GET /publishers/{id}` - Get a publisher by ID.
-- `DELETE /publishers/{id}` - Delete a publisher by ID.
-- `GET /publishers/find/{isbn13}` - Find a publisher by ISBN13.
+Pull requests are welcome!
+If you have suggestions for improvements, feel free to open an issue or submit a PR.
+All contributions, big or small, are appreciated!
 
+---
 
-## Contributing
-Contributions are welcome! Please fork the repository and submit pull requests.
+## 📄 License
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
+This project is licensed under the MIT License.
+See the [LICENSE](LICENSE) file for more information.
