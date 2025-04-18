@@ -66,13 +66,6 @@ New features, refactoring, and improvements are being added continuously.
 
 ---
 
-## ✨ Contributions
-
-Pull requests are welcome!
-If you have suggestions for improvements, feel free to open an issue or submit a PR.
-All contributions, big or small, are appreciated!
-
----
 
 ## 📄 License
 
