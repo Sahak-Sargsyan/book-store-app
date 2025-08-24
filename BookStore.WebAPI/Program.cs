@@ -2,9 +2,10 @@ using AutoMapper;
 using BookStore.BLL;
 using BookStore.BLL.Interfaces;
 using BookStore.BLL.Services;
+using BookStore.BLL.Validation;
 using BookStore.DAL.Data;
 using BookStore.DAL.Interface;
-using Microsoft.AspNetCore.Identity;
+using BookStore.WebAPI.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
@@ -55,6 +56,9 @@ namespace BookStore.WebAPI
             builder.Services.AddScoped<IPublisherService, PublisherService>();
             builder.Services.AddScoped<IAuthService, AuthenticationService>();
 
+            // Validation services
+            builder.Services.AddScoped<IBookStoreValidation, BookStoreValidation>();
+
             // Automapper
             builder.Services.AddSingleton(new MapperConfiguration(cfg =>
             {
@@ -74,6 +78,8 @@ namespace BookStore.WebAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseAuthentication();
             app.UseAuthorization();

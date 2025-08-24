@@ -6,6 +6,8 @@ using System.Text;
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using BookStore.Common.Exceptions;
+using BookStore.Common.Constants;
 
 
 namespace BookStore.BLL.Services
@@ -33,6 +35,10 @@ namespace BookStore.BLL.Services
 
             var httpClient = new HttpClient();
             var result = await httpClient.PostAsync(url + "login", content);
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new AuthException(AuthExceptionMessages.INCORRECTCREDENTIALS);
+            }
             var res = JsonConvert.DeserializeObject<LoginResponseDto>(await result.Content.ReadAsStringAsync());
 
             return res;

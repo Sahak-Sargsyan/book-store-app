@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.BLL.Interfaces;
+using BookStore.BLL.Validation;
 using BookStore.DAL.Entitites;
 using BookStore.DAL.Interface;
 using BookStore.Dtos;
@@ -10,15 +11,19 @@ public class BookService : IBookService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IBookStoreValidation _validation;
 
-    public BookService(IUnitOfWork unitOfWork, IMapper mapper)
+    public BookService(IUnitOfWork unitOfWork, IMapper mapper, IBookStoreValidation validation)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _validation = validation;
     }
 
     public async Task AddBookAsync(BookCreateDto model)
     {
+        _validation.ValidateModel(model);
+
         var entity = _mapper.Map<Book>(model);
         entity.Id = Guid.NewGuid();
         await _unitOfWork.BookRepository.AddAsync(entity);
@@ -28,8 +33,9 @@ public class BookService : IBookService
     public async Task DeleteBookByIsbn13Async(string isbn13)
     {
         var entity = await _unitOfWork.BookRepository.GetBookByIsbn13Async(isbn13);
-        var id = entity.Id;
-        _unitOfWork.BookRepository.DeleteById(id);
+        _validation.ValidateEntityExistense(entity);
+
+        _unitOfWork.BookRepository.DeleteById(entity.Id);
         await _unitOfWork.SaveAsync();
     }
 
@@ -43,6 +49,8 @@ public class BookService : IBookService
     public async Task<BookListDto> GetBookByIdAsync(Guid id)
     {
         var entity = await _unitOfWork.BookRepository.GetByIdAsync(id);
+        _validation.ValidateEntityExistense(entity);
+
         var book = _mapper.Map<BookListDto>(entity);
         return book;
     }
@@ -50,6 +58,8 @@ public class BookService : IBookService
     public async Task<BookListDto> GetBookByIsbn13Async(string isbn13)
     {
         var entity = await _unitOfWork.BookRepository.GetBookByIsbn13Async(isbn13);
+        _validation.ValidateEntityExistense(entity);
+
         var book = _mapper.Map<BookListDto>(entity);
         return book;
     }
@@ -77,6 +87,8 @@ public class BookService : IBookService
 
     public async Task UpdateBookAsync(BookUpdateDto model)
     {
+        _validation.ValidateModel(model);
+
         var entity = _mapper.Map<Book>(model);
         _unitOfWork.BookRepository.Update(entity);
         await _unitOfWork.SaveAsync();

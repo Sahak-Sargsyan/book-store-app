@@ -23,7 +23,6 @@ namespace BookStore.WebAPI.Controllers
         public async Task<ActionResult<LoginResponseDto>> Login(LoginRequestDto loginRequest)
         {
             var res = await _authService.Login(loginRequest);
-
             return Ok(res);
         }
 

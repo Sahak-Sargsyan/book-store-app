@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.BLL.Interfaces;
+using BookStore.BLL.Validation;
 using BookStore.DAL.Entitites;
 using BookStore.DAL.Interface;
 using BookStore.Dtos;
@@ -10,15 +11,19 @@ public class PublisherService : IPublisherService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IBookStoreValidation _validation;
 
-    public PublisherService(IUnitOfWork unitOfWork, IMapper mapper)
+    public PublisherService(IUnitOfWork unitOfWork, IMapper mapper, IBookStoreValidation validation)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _validation = validation;
     }
 
     public async Task AddPublisherAsync(PublisherCreateDto model)
     {
+        _validation.ValidateModel(model);
+
         var entity = _mapper.Map<Publisher>(model);
         await _unitOfWork.PublisherRepository.AddAsync(entity);
         await _unitOfWork.SaveAsync();
@@ -26,6 +31,9 @@ public class PublisherService : IPublisherService
 
     public async Task DeletePublisherByIdAsync(Guid id)
     {
+        var entity = await _unitOfWork.PublisherRepository.GetByIdAsync(id);
+        _validation.ValidateEntityExistense(entity);
+
         _unitOfWork.PublisherRepository.DeleteById(id);
         await _unitOfWork.SaveAsync();
     }
@@ -40,6 +48,8 @@ public class PublisherService : IPublisherService
     public async Task<PublisherListDto> GetPublisherByIdAsync(Guid id)
     {
         var entity = await _unitOfWork.PublisherRepository.GetByIdAsync(id);
+        _validation.ValidateEntityExistense(entity);
+
         var publisher = _mapper.Map<PublisherListDto>(entity);
         return publisher;
     }
@@ -47,12 +57,16 @@ public class PublisherService : IPublisherService
     public async Task<PublisherListDto> GetPublisherByIsbn13Async(string isbn13)
     {
         var entity = await _unitOfWork.PublisherRepository.GetPublisherByIsbn13(isbn13);
+        _validation.ValidateEntityExistense(entity);
+
         var publisher = _mapper.Map<PublisherListDto>(entity);
         return publisher;
     }
 
     public async Task UpdatePublisherAsync(PublisherUpdateDto model)
     {
+        _validation.ValidateModel(model);
+
         var updateEntity = _mapper.Map<Publisher>(model);
         _unitOfWork.PublisherRepository.Update(updateEntity);
         await _unitOfWork.SaveAsync();
