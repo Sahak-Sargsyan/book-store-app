@@ -17,6 +17,7 @@ public class PublisherService : IPublisherService
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _validation = validation;
     }
 
     public async Task AddPublisherAsync(PublisherCreateDto model)

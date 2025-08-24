@@ -5,7 +5,7 @@ using BookStore.BLL.Services;
 using BookStore.BLL.Validation;
 using BookStore.DAL.Data;
 using BookStore.DAL.Interface;
-using Microsoft.AspNetCore.Identity;
+using BookStore.WebAPI.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Net;
@@ -78,6 +78,8 @@ namespace BookStore.WebAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseAuthentication();
             app.UseAuthorization();
