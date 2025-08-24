@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.BLL.Interfaces;
+using BookStore.BLL.Validation;
 using BookStore.DAL.Entitites;
 using BookStore.DAL.Interface;
 using BookStore.Dtos;
@@ -10,15 +11,19 @@ public class AuthorService : IAuthorService
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IBookStoreValidation _validation;
 
-    public AuthorService(IUnitOfWork unitOfWork, IMapper mapper)
+    public AuthorService(IUnitOfWork unitOfWork, IMapper mapper, IBookStoreValidation validation)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _validation = validation;
     }
 
     public async Task AddAuthorAsync(AuthorCreateDto model)
     {
+        _validation.ValidateModel(model);
+
         var entity = _mapper.Map<Author>(model);
         await _unitOfWork.AuthorRepository.AddAsync(entity);
         await _unitOfWork.SaveAsync();
@@ -26,6 +31,9 @@ public class AuthorService : IAuthorService
 
     public async Task DeleteAuthorByIdAsync(Guid id)
     {
+        var entity = await _unitOfWork.AuthorRepository.GetByIdAsync(id);
+        _validation.ValidateEntityExistense(entity);
+
         _unitOfWork.AuthorRepository.DeleteById(id);
         await _unitOfWork.SaveAsync();
     }
@@ -40,6 +48,8 @@ public class AuthorService : IAuthorService
     public async Task<AuthorListDto> GetAuthorByIdAsync(Guid id)
     {
         var entity = await _unitOfWork.AuthorRepository.GetByIdAsync(id);
+        _validation.ValidateEntityExistense(entity);
+
         var author = _mapper.Map<AuthorListDto>(entity);
         return author;
     }
@@ -53,6 +63,8 @@ public class AuthorService : IAuthorService
 
     public async Task UpdateAuthorAsync(AuthorUpdateDto model)
     {
+        _validation.ValidateModel(model);
+
         var updateEntity = _mapper.Map<Author>(model);
         _unitOfWork.AuthorRepository.Update(updateEntity);
         await _unitOfWork.SaveAsync();
