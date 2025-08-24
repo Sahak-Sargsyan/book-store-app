@@ -20,84 +20,42 @@ public class GenreController : Controller
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GenreListDto>>> GetAllGenresAsync()
     {
-        try
-        {
-            var genres = await _service.GetAllGenresAsync();
-            return Ok(genres);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var genres = await _service.GetAllGenresAsync();
+        return Ok(genres);
     }
 
     [HttpGet("find/{isbn13}")]
     public async Task<ActionResult<IEnumerable<GenreListDto>>> GetGenresByIsbn13Async(string isbn13)
     {
-        try
-        {
-            var genres = await _service.GetGenresByIsbn13Async(isbn13);
-            return Ok(genres);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var genres = await _service.GetGenresByIsbn13Async(isbn13);
+        return Ok(genres);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<GenreListDto>> GetGenreByIdAsync(Guid id)
     {
-        try
-        {
-            var genre = await _service.GetGenreByIdAsync(id);
-            return Ok(genre);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var genre = await _service.GetGenreByIdAsync(id);
+        return Ok(genre);
     }
 
     [HttpPost]
     public async Task<ActionResult> AddGenreAsync([FromBody] GenreCreateDto genre)
     {
-        try
-        {
-            await _service.AddGenreAsync(genre);
-            return Ok(genre);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        await _service.AddGenreAsync(genre);
+        return Ok(genre);
     }
 
     [HttpPut]
     public async Task<ActionResult> UpdateGenreAsync([FromBody] GenreUpdateDto genreToUpdate)
     {
-        try
-        {
-            await _service.UpdateGenreAsync(genreToUpdate);
-            return Ok(genreToUpdate);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        await _service.UpdateGenreAsync(genreToUpdate);
+        return Ok(genreToUpdate);
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteGenreAsync(Guid id)
     {
-        try
-        {
-            await _service.DeleteGenreByIdAsync(id);
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        await _service.DeleteGenreByIdAsync(id);
+        return Ok();
     }
 }

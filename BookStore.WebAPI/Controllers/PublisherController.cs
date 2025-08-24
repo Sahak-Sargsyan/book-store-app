@@ -32,7 +32,6 @@ public class PublisherController : Controller
     [HttpGet("find/{isbn13}")]
     public async Task<ActionResult<PublisherListDto>> GetPublisherByIsbn13Async(string isbn13)
     {
-
         var publisher = await _service.GetPublisherByIsbn13Async(isbn13);
         return Ok(publisher);
     }
@@ -47,7 +46,6 @@ public class PublisherController : Controller
     [HttpPut]
     public async Task<ActionResult<PublisherListDto>> UpdatePublisherAsync([FromBody] PublisherUpdateDto publisherToUpdate)
     {
-
         await _service.UpdatePublisherAsync(publisherToUpdate);
         return Ok(publisherToUpdate);
     }
