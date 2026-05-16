@@ -1,9 +1,9 @@
 
-# 📚 BookStoreApp
+# BookStoreApp
 
 A multi-layered .NET Web API project for managing a bookstore, including user authentication, business logic, data access with PostgreSQL, and DTO support using AutoMapper.
 
-## 🏗️ Project Structure
+## Project Structure
 
 - AuthService           – Handles user authentication
 - BookStore.BLL         – Business Logic Layer
@@ -11,16 +11,16 @@ A multi-layered .NET Web API project for managing a bookstore, including user au
 - BookStore.Dtos        – Data Transfer Objects (AutoMapper profiles added)
 - BookStore.WebAPI      – Main API endpoints
 
-## 🚀 Features
+## Features
 
-- ✅ Layered architecture
-- 🔐 Authentication module (AuthService)
-- 🧠 Business logic separated in `BookStore.BLL`
-- 💾 Data layer using PostgreSQL `BookStore.DAL`
-- 🔄 AutoMapper integration for DTOs
-- 🌐 ASP.NET Core Web API `BookStore.WebAPI`
+- Layered architecture
+- Authentication module (AuthService)
+- Business logic separated in `BookStore.BLL`
+- Data layer using PostgreSQL `BookStore.DAL`
+- AutoMapper integration for DTOs
+- ASP.NET Core Web API `BookStore.WebAPI`
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - ASP.NET Core
 - Entity Framework Core
@@ -36,7 +36,7 @@ A multi-layered .NET Web API project for managing a bookstore, including user au
 - SQL Server or any supported database
 
 
-### 📦 Setup Instructions
+### Setup Instructions
 
 1. Clone the repository
     ```bash
@@ -59,7 +59,7 @@ A multi-layered .NET Web API project for managing a bookstore, including user au
     dotnet run --project BookStore.WebAPI
     ```
 
-## 🚧 Status
+## Status
 
 This project is currently under active development.
 New features, refactoring, and improvements are being added continuously.
@@ -67,7 +67,7 @@ New features, refactoring, and improvements are being added continuously.
 ---
 
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 See the [LICENSE](LICENSE) file for more information.
